@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Workshop Schedule</title>
+  <title>Workshop Schedule with Charts</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,7 +18,7 @@
     table {
       border-collapse: collapse;
       width: 100%;
-      margin-top: 10px;
+      margin-top: 20px;
     }
     th, td {
       border: 1px solid #ccc;
@@ -30,6 +31,11 @@
     tr:nth-child(even) {
       background-color: #fafafa;
     }
+    .chart-container {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
@@ -39,32 +45,5 @@
   <input type="file" id="csvFile" accept=".csv" />
   <div id="output"></div>
 
-  <script>
-    document.getElementById('csvFile').addEventListener('change', function (e) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-
-      reader.onload = function (e) {
-        const text = e.target.result.trim();
-        const rows = text.split('\n').map(row => row.split(','));
-
-        let html = '<table><thead><tr>';
-        rows[0].forEach(header => html += `<th>${header}</th>`);
-        html += '</tr></thead><tbody>';
-
-        for (let i = 1; i < rows.length; i++) {
-          html += '<tr>';
-          rows[i].forEach(cell => html += `<td>${cell}</td>`);
-          html += '</tr>';
-        }
-
-        html += '</tbody></table>';
-        document.getElementById('output').innerHTML = html;
-      };
-
-      reader.readAsText(file);
-    });
-  </script>
-
-</body>
-</html>
+  <div class="chart-container">
+    <h2>Workshops per Venue (Bar Chart)<
